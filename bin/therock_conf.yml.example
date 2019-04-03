@@ -1,0 +1,8 @@
+host: www.therocktrading.com
+post_ws: '/api/'
+port: 443
+user: 'mytestuser'
+pass: 'unknownpassworsd'
+api_key: 'd84a39b9d92006c944a6518f0cf4081bb1882c02'
+use_ssl: true
+

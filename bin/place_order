@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require 'therocktrading'
+
+def usage
+  puts "options: "
+  puts " type_of_order trade_currency base_currency quantity price"
+  puts " SELL BTC EUR 1.2 250"
+  exit
+end
+
+usage unless ARGV.size > 4
+
+therock_config = YAML.load("therock_conf.yml")
+
+TheRockTrading::Configuration.configure do |config|
+  config.host = therock_config["host"]
+  config.port = therock_config["port"]
+  config.user = therock_config["user"]
+  config.pass = therock_config["pass"]
+  config.api_key = therock_config["api_key"]
+  config.use_ssl = therock_config["use_ssl"]
+end if therock_config
+
+type_of_order = ARGV[0]
+trade_currency = ARGV[1]
+base_currency = ARGV[2]
+quantity = ARGV[3]
+price = ARGV[4]
+
+response = TheRockTrading.place_order(type_of_order, quantity, price, trade_currency, base_currency)
+
+puts response
